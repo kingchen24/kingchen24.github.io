@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解 Transformer 中的旋转位置编码 (RoPE) | 爱学习的獭猫</title>
+    <!-- 引入 Tailwind CSS v4 -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- 引入 Lucide Icons 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #FDFBF7; /* 温暖奶油白 */
+            color: #2D2825; /* 炭灰棕 */
+        }
+        
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, serif;
+        }
+
+        .font-mono-code {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        }
+
+        .bg-grid-notebook {
+            background-image: radial-gradient(rgba(45, 40, 37, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-grid-notebook selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col antialiased">
+
+    <!-- 1. Header 导航栏 -->
+    <header class="max-w-4xl w-full mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="font-serif-sc text-xl font-bold tracking-wider hover:text-amber-700 transition-colors duration-300 flex items-center gap-2">
+            <span>🐾</span> 爱学习的獭猫
+        </a>
+        <nav class="flex items-center gap-8 text-sm font-medium text-stone-500">
+            <a href="blog-list.html" class="text-stone-900 border-b border-stone-800 pb-0.5">Notes</a>
+            <a href="index.html#projects" class="hover:text-stone-900 transition-colors duration-300">Projects</a>
+            <a href="index.html#journey" class="hover:text-stone-900 transition-colors duration-300">Timeline</a>
+            <a href="about.html" class="hover:text-stone-900 transition-colors duration-300">About</a>
+        </nav>
+    </header>
+
+    <!-- 2. 主体文章区域 -->
+    <main class="max-w-4xl w-full mx-auto px-6 flex-grow py-6">
+        
+        <!-- 文章导航面包屑 -->
+        <div class="flex items-center gap-2 text-xs text-stone-400 mb-6 font-medium">
+            <a href="index.html" class="hover:text-stone-600">首页</a>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <a href="blog-list.html" class="hover:text-stone-600">档案馆</a>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <span class="text-stone-500 truncate">正文手稿</span>
+        </div>
+
+        <!-- 文章头部信息 -->
+        <header class="border-b border-stone-200/60 pb-8 mb-10 space-y-4">
+            <div class="flex flex-wrap items-center gap-3 text-xs text-stone-400">
+                <time datetime="2026-05-20" class="font-mono bg-stone-100 px-2 py-0.5 rounded text-stone-600">2026.05.20</time>
+                <span>·</span>
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 12 min read</span>
+                <span>·</span>
+                <span class="flex items-center gap-1"><i data-lucide="pen-tool" class="w-3.5 h-3.5"></i> 3,420 字</span>
+                <span>·</span>
+                <span class="text-amber-700 font-medium">#计算机科学</span>
+            </div>
+            
+            <h1 class="font-serif-sc text-2xl md:text-3.5xl font-bold text-stone-900 leading-tight tracking-tight">
+                理解 Transformer 中的旋转位置编码 (RoPE)：从几何直觉到数学推导
+            </h1>
+
+            <div class="flex items-center gap-2 pt-2">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-emerald-50 text-[10px] font-medium text-emerald-800 border border-emerald-200/40">
+                    <span class="w-1 h-1 rounded-full bg-emerald-500"></span> 数字花园长期维护中
+                </span>
+            </div>
+        </header>
+
+        <!-- 3. 文章正文区域（控制在 max-w-2xl 保证极佳的长读视觉） -->
+        <article class="max-w-2xl mx-auto space-y-6 text-stone-800 text-base leading-relaxed tracking-wide">
+            
+            <p>
+                在处理大语言模型的长文本外推问题时，位置编码的设计往往决定了模型的生死。最近在深夜重读论文，我重新在草稿纸上推演了一遍大名鼎鼎的 <strong>RoPE (Rotary Position Embedding)</strong>。这篇文章不打算直接堆砌生硬的算法公式，而是想跟以前一样，顺着我的学习笔记，聊聊如何从最纯粹的二维空间几何直觉一步步演进出那套优雅的复数矩阵旋转。
+            </p>
+
+            <h2 class="font-serif-sc text-xl font-bold text-stone-900 pt-6 pb-2 border-b border-stone-100 flex items-center gap-2">
+                <span class="text-amber-600 font-mono text-sm">01.</span> 核心思想：我们要解决什么？
+            </h2>
+            <p>
+                传统的绝对位置编码（如 Transformer 原版中的正余弦编码）就像给每个座位贴上固定标签。但在自注意力机制中，我们真正关心的是词与词之间的<strong>相对距离</strong>。我们希望找到一个函数，当它作用于两个向量时，它们内积的结果里只包含它们的相对位置差 $m - n$。
+            </p>
+
+            <!-- 4. 手札引用块示范 -->
+            <blockquote class="bg-amber-50/40 border-l-2 border-amber-600 px-4 py-3 my-4 rounded-r-lg text-sm text-stone-700 space-y-1">
+                <p class="font-medium flex items-center gap-1.5 text-amber-800">
+                    <i data-lucide="lightbulb" class="w-4 h-4"></i> 獭猫的深夜直觉提示：
+                </p>
+                <p class="italic">
+                    “如果把词向量看作是夜空中漂浮的星星，绝对编码是记录它们在星图上的绝对坐标；而旋转编码则是让整个星空以某种特定的规律旋转——星星之间的相对夹角和距离保持不变。这种复数空间的旋转，正是数学上最纯粹的浪漫。”
+                </p>
+            </blockquote>
+
+            <h2 class="font-serif-sc text-xl font-bold text-stone-900 pt-6 pb-2 border-b border-stone-100 flex items-center gap-2">
+                <span class="text-amber-600 font-mono text-sm">02.</span> 二维空间中的几何旋转
+            </h2>
+            <p>
+                在线性代数中，要让一个二维向量 $\mathbf{x} = [x_1, x_2]^T$ 旋转一个角度 $\theta$，我们只需要让它乘以一个非常经典的旋转矩阵 $R_\theta$：
+            </p>
+
+            <!-- 5. 数学公式排版示范 -->
+            <div class="py-6 my-4 bg-stone-100/40 border border-stone-200/40 rounded-xl text-center overflow-x-auto">
+                <p class="text-sm font-mono-code inline-block text-left text-stone-900">
+                    $$ R_{\theta, m} = \begin{pmatrix} \cos m\theta & -\sin m\theta \\ \sin m\theta & \cos m\theta \end{pmatrix} $$
+                </p>
+            </div>
+
+            <p>
+                RoPE 的精妙之处就在于，它将高维的词向量拆解成无数个两两一组的二维子空间。对于第 $m$ 个位置的词向量，在每个二维子空间里都让它旋转 $m\theta$ 的角度。当两个旋转后的向量进行内积时，旋转矩阵的特性恰好导致绝对位置相减，完美消去了绝对坐标，只剩下了相对距离。
+            </p>
+
+            <h2 class="font-serif-sc text-xl font-bold text-stone-900 pt-6 pb-2 border-b border-stone-100 flex items-center gap-2">
+                <span class="text-amber-600 font-mono text-sm">03.</span> 数据的流动过程
+            </h2>
+            <p>
+                为了在写代码重构时不弄错张量形状，我在手札里画了一个极其直观的数据流向图。可以看到，输入特征是如何经过分组并最终通过旋转算子注入相对位置特性的：
+            </p>
+
+            <!-- 6. 拟物/轻科研感 纯手绘线条Mermaid替代图 -->
+            <div class="p-6 my-4 bg-white border border-stone-200/60 rounded-xl space-y-4">
+                <div class="text-xs font-medium text-stone-400 flex items-center gap-1.5">
+                    <i data-lucide="git-graph" class="w-3.5 h-3.5"></i> 数据流动拓扑观测图 (Pipeline)
+                </div>
+                <div class="flex flex-col items-center gap-2 text-xs font-mono text-stone-600 py-4">
+                    <div class="px-4 py-2 bg-stone-100 border border-stone-200 rounded">输入词特征向量 (Shape: [Batch, Length, Dim])</div>
+                    <i data-lucide="arrow-down" class="w-4 h-4 text-stone-300"></i>
+                    <div class="px-4 py-2 bg-stone-100 border border-stone-200 rounded text-center">维度切片与分组<br><span class="text-[10px] text-stone-400">将 Dim 拆解为多个 [x1, x2] 二维子空间</span></div>
+                    <i data-lucide="arrow-down" class="w-4 h-4 text-stone-300"></i>
+                    <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
+                        <div class="px-2 py-3 bg-amber-50/60 border border-amber-200 rounded text-center">计算基础旋转角 $m\theta$</div>
+                        <div class="px-2 py-3 bg-stone-50 border border-stone-200 rounded text-center">保留原始元素位置 $m$</div>
+                    </div>
+                    <i data-lucide="arrow-down" class="w-4 h-4 text-stone-300"></i>
+                    <div class="px-4 py-2 bg-amber-600 text-white font-medium rounded shadow-xs">应用 Rotary 算子变换 (RoPE)</div>
+                </div>
+            </div>
+
+            <h2 class="font-serif-sc text-xl font-bold text-stone-900 pt-6 pb-2 border-b border-stone-100 flex items-center gap-2">
+                <span class="text-amber-600 font-mono text-sm">04.</span> 极简 PyTorch 代码演练
+            </h2>
+            <p>
+                下面是我在本地沙盒环境中调通的核心算子代码。这里为了保证长读舒适性，我将代码中的关键注释写得极其通俗，抛弃了教条式的变量命名。
+            </p>
+
+            <!-- 7. 代码高亮块排版示范 -->
+            <div class="rounded-xl overflow-hidden bg-[#221E1C] border border-stone-800 my-6 shadow-sm">
+                <!-- 代码块顶栏 -->
+                <div class="flex justify-between items-center px-4 py-2.5 bg-[#1A1715] border-b border-stone-800 text-xs font-mono text-stone-400">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-orange-500/80"></span> rope_tensor.py (Python)</span>
+                    <button class="hover:text-white flex items-center gap-1 transition-colors py-0.5 px-1.5 rounded bg-stone-800/50">
+                        <i data-lucide="copy" class="w-3 h-3"></i> 复制手稿
+                    </button>
+                </div>
+                <!-- 代码核心内容 -->
+                <pre class="p-4 overflow-x-auto text-xs font-mono-code leading-relaxed text-stone-200"><code class="block">import torch
+
+def apply_rotary_emb(x: torch.Tensor, freqs_cis: torch.Tensor) -> torch.Tensor:
+    # 1. 将输入的复数特征拆解
+    x_complex = torch.view_as_complex(x.float().reshape(*x.shape[:-1], -1, 2))
+    
+    # 2. 广播频率矩阵以匹配输入的 Batch 和 Head 形状
+    freqs_cis = freqs_cis.view(1, x_complex.shape[1], 1, x_complex.shape[-1])
+    
+    # 3. 核心魔法：直接在复数空间进行哈达玛积（等价于二维矩阵旋转）
+    x_rotated = x_complex * freqs_cis
+    
+    # 4. 重新铺平为实数空间返回
+    return torch.view_as_real(x_rotated).flatten(-2)</code></pre>
+            </div>
+
+            <p>
+                在深夜跑通这段测试代码后，看着损失函数（Loss）曲线稳步下降，那种内心的安静是无法言喻的。这或许就是长期主义研究者最纯粹的快乐。
+            </p>
+
+        </article>
+
+        <!-- 4. 上一篇 / 下一篇 导航与文章版权指引 -->
+        <div class="max-w-2xl mx-auto mt-16 pt-6 border-t border-stone-200/60 text-xs text-stone-400 space-y-6">
+            <!-- 知识共享协议提示 -->
+            <div class="bg-stone-50 border border-stone-200/40 rounded-xl p-4 flex items-start gap-3">
+                <i data-lucide="copyright" class="w-4 h-4 text-stone-400 shrink-0 mt-0.5"></i>
+                <p class="leading-relaxed">
+                    本手稿采用 <span class="text-stone-700 underline cursor-pointer">CC BY-NC-SA 4.0</span> 许可协议。属于獭猫的个人公开学习笔记，转载请保留数字工作室出处。如果文中的推导或者小玩具对你有启发，欢迎随时写信交流。
+                </p>
+            </div>
+
+            <!-- 上下篇翻书逻辑 -->
+            <div class="flex justify-between items-center font-medium pt-2">
+                <a href="#" class="text-stone-500 hover:text-stone-900 transition-colors flex flex-col items-start gap-1 max-w-[45%]">
+                    <span class="text-[10px] text-stone-400 font-mono">← 上一本笔记手札</span>
+                    <span class="truncate w-full text-sm font-serif-sc font-bold">为什么我的独立轻量级卡片笔记工具坚持采用本地优先架构？</span>
+                </a>
+                <div class="h-8 w-px bg-stone-200"></div>
+                <a href="#" class="text-stone-500 hover:text-stone-900 transition-colors flex flex-col items-end gap-1 max-w-[45%]">
+                    <span class="text-[10px] text-stone-400 font-mono">下一本笔记手札 →</span>
+                    <span class="truncate w-full text-sm font-serif-sc font-bold text-right">16位微型自定义微处理器自制记录</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 5. Footer 底部栏 -->
+    <footer class="border-t border-stone-200/60 bg-stone-50/50 mt-20 py-10 text-stone-400 text-xs">
+        <div class="max-w-4xl w-full mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 爱学习的獭猫. 慢火慢熬的数字花园.
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5"></i> Email</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="rss" class="w-3.5 h-3.5"></i> RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

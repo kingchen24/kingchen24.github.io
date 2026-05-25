@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究员档案 | 爱学习的獭猫</title>
+    <!-- 引入 Tailwind CSS v4 -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- 引入 Lucide Icons 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #FDFBF7; /* 温暖奶油白 */
+            color: #2D2825; /* 炭灰棕 */
+        }
+        
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, serif;
+        }
+
+        .bg-grid-notebook {
+            background-image: radial-gradient(rgba(45, 40, 37, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-grid-notebook selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col antialiased">
+
+    <!-- 1. Header 导航栏 -->
+    <header class="max-w-4xl w-full mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="font-serif-sc text-xl font-bold tracking-wider hover:text-amber-700 transition-colors duration-300 flex items-center gap-2">
+            <span>🐾</span> 爱学习的獭猫
+        </a>
+        <nav class="flex items-center gap-8 text-sm font-medium text-stone-500">
+            <a href="blog-list.html" class="hover:text-stone-900 transition-colors duration-300">Notes</a>
+            <a href="index.html#projects" class="hover:text-stone-900 transition-colors duration-300">Projects</a>
+            <a href="index.html#journey" class="hover:text-stone-900 transition-colors duration-300">Timeline</a>
+            <a href="about.html" class="text-stone-900 border-b border-stone-800 pb-0.5">About</a>
+        </nav>
+    </header>
+
+    <!-- 2. 主体 About 区域 -->
+    <main class="max-w-2xl w-full mx-auto px-6 flex-grow py-8">
+        
+        <!-- 核心档案头部：拟人化观测日志 -->
+        <section class="flex flex-col sm:flex-row items-center sm:items-start gap-8 border-b border-stone-200/60 pb-10 mb-12">
+            <!-- 獭猫精细头像框 -->
+            <div class="w-24 h-24 rounded-2xl bg-white border border-stone-200/60 p-3 flex items-center justify-center shrink-0 shadow-xs relative">
+                <!-- 纯手绘线稿头像 SVG -->
+                <svg viewBox="0 0 100 100" class="w-full h-full text-stone-700" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <circle cx="50" cy="52" r="24" fill="#FDFBF7"/>
+                    <path d="M 32 38 L 36 24 L 46 32" fill="#E5E7EB"/> <!-- 耳 -->
+                    <path d="M 68 38 L 64 24 L 54 32" fill="#E5E7EB"/>
+                    <!-- 眼镜 -->
+                    <rect x="36" y="44" width="11" height="9" rx="1"/>
+                    <rect x="53" y="44" width="11" height="9" rx="1"/>
+                    <line x1="47" y1="48" x2="53" y2="48"/>
+                    <!-- 软萌胡须 -->
+                    <line x1="26" y1="56" x2="16" y2="54"/>
+                    <line x1="26" y1="60" x2="14" y2="60"/>
+                    <line x1="74" y1="56" x2="84" y2="54"/>
+                    <line x1="74" y1="60" x2="86" y2="60"/>
+                </svg>
+                <span class="absolute -bottom-1.5 -right-1.5 bg-amber-600 text-white text-[9px] px-1.5 py-0.5 rounded-full scale-90 font-mono">Lv.26</span>
+            </div>
+
+            <!-- 右侧属性表格流 -->
+            <div class="space-y-3 w-full text-center sm:text-left">
+                <h1 class="font-serif-sc text-2xl font-bold text-stone-900 tracking-tight">首席研究员：獭猫 (OtterCat)</h1>
+                <p class="text-stone-500 text-sm leading-relaxed">
+                    一只由「水獭的死磕折腾劲」与「美短小猫的安静长情」融合而成的数字化虚拟化身。长期驻扎在个人的小小数字工作室中，喜欢在深夜伴着白噪音看论文、敲击代码、推导算式。
+                </p>
+                <!-- 拟物标签 -->
+                <div class="flex flex-wrap justify-center sm:justify-start gap-2 pt-1 font-mono text-[10px]">
+                    <span class="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200/40">#深夜活跃型</span>
+                    <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-600">#轻度科研宅</span>
+                    <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-600">#独立开发者</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200/40">#长期主义者</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心板块 1：研究方向与技术栈 -->
+        <section class="space-y-6 mb-12">
+            <h2 class="font-serif-sc text-lg font-bold text-stone-950 flex items-center gap-2 border-b border-stone-100 pb-2">
+                <i data-lucide="compass" class="w-4 h-4 text-stone-400"></i> 研究航向与实验工具箱
+            </h2>
+            <p class="text-sm text-stone-600 leading-relaxed">
+                我不迷信过于庞大的工程架构，更偏爱那些能够被完全掌控、具有数学美感与极佳效率的底层技术。目前我的观测与折腾主要聚焦于以下几个实验象限：
+            </p>
+
+            <!-- 纸质刻度进度条系统 -->
+            <div class="space-y-4 pt-2">
+                <!-- 技能 1 -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-baseline text-xs">
+                        <span class="font-medium text-stone-800 flex items-center gap-1">核心计算架构 <span class="text-[10px] text-stone-400 font-normal">(PyTorch / Transformer 算子 / 硬件体系)</span></span>
+                        <span class="font-mono text-stone-400">研习进度: 85%</span>
+                    </div>
+                    <div class="h-1 w-full bg-stone-100 rounded-full overflow-hidden p-[0.5px] border border-stone-200/30">
+                        <div class="h-full bg-amber-600 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- 技能 2 -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-baseline text-xs">
+                        <span class="font-medium text-stone-800 flex items-center gap-1">独立轻量化开发 <span class="text-[10px] text-stone-400 font-normal">(TypeScript / Rust / Local-First 架构)</span></span>
+                        <span class="font-mono text-stone-400">研习进度: 70%</span>
+                    </div>
+                    <div class="h-1 w-full bg-stone-100 rounded-full overflow-hidden p-[0.5px] border border-stone-200/30">
+                        <div class="h-full bg-stone-700 rounded-full" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <!-- 技能 3 -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-baseline text-xs">
+                        <span class="font-medium text-stone-800 flex items-center gap-1">极简视觉设计与插画 <span class="text-[10px] text-stone-400 font-normal">(Figma / 矢量线稿 / 原型打磨)</span></span>
+                        <span class="font-mono text-stone-400">研习进度: 60%</span>
+                    </div>
+                    <div class="h-1 w-full bg-stone-100 rounded-full overflow-hidden p-[0.5px] border border-stone-200/30">
+                        <div class="h-full bg-stone-400 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心板块 2：深夜书桌装备清单 (营造生活感与个人工作室氛围) -->
+        <section class="space-y-6 mb-12 bg-stone-50/60 border border-stone-200/40 rounded-xl p-5">
+            <h2 class="font-serif-sc text-base font-bold text-stone-900 flex items-center gap-2">
+                <i data-lucide="wrench" class="w-4 h-4 text-amber-600/80"></i> 深夜书桌生存装备 (Desk Setup)
+            </h2>
+            <p class="text-xs text-stone-500 leading-relaxed">
+                这些散落在木质书桌上的实体物件，构成了我抵抗数字世界噪音的实体庇护所：
+            </p>
+            
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-stone-600 font-medium">
+                <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-amber-500"></span> Screen: 27寸明基专业色彩显示器 (3000K 护眼夜间模式)</li>
+                <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-stone-400"></span> Keyboard: HHKB Professional Type-S (静电容无声敲击)</li>
+                <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-stone-400"></span> Fuel: 浅烘耶加雪菲单品豆 (手冲 / 维持代码高产)</li>
+                <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-stone-400"></span> Analog: MD Paper 纸质网格草稿本 + 凌美钢笔</li>
+            </ul>
+        </section>
+
+        <!-- 核心板块 3：精神栖息地 / 兴趣 -->
+        <section class="space-y-4 mb-12">
+            <h2 class="font-serif-sc text-lg font-bold text-stone-950 flex items-center gap-2 border-b border-stone-100 pb-2">
+                <i data-lucide="antenna" class="w-4 h-4 text-stone-400"></i> 工作室外的精神辐射
+            </h2>
+            <p class="text-sm text-stone-600 leading-relaxed">
+                当服务器编译进度条拉满、或者算法推演陷入死胡同的时候，通常可以在这些角落找到我：
+            </p>
+            <div class="text-xs text-stone-500 leading-relaxed pl-4 border-l border-stone-200 space-y-2 italic">
+                <p>“在旧书店的旧纸张气味里消磨掉一整个无所事事的雨天下午。”</p>
+                <p>“带上一保温杯热咖啡，坐在河边安静地观察水鸟和流水的层流与湍流现象。”</p>
+                <p>“去搜集各种精美的实体复古开源徽章以及极其小众的独立印刷手账。”</p>
+            </div>
+        </section>
+
+        <!-- 核心板块 4：电波联络站 -->
+        <section class="space-y-4">
+            <h2 class="font-serif-sc text-lg font-bold text-stone-950 flex items-center gap-2 border-b border-stone-100 pb-2">
+                <i data-lucide="mail-open" class="w-4 h-4 text-stone-400"></i> 发射联络电波
+            </h2>
+            <p class="text-sm text-stone-600 leading-relaxed">
+                这个网站不设任何复杂的社交算法追踪。如果你也喜欢在深夜安静地折腾一些奇奇怪怪的技术小玩具、或者同样是一位长期主义的独立创作者，随时欢迎向我的数字信箱投递电波：
+            </p>
+            
+            <div class="pt-2 flex flex-col sm:flex-row gap-4 font-mono text-xs">
+                <div class="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white border border-stone-200/60 text-stone-700 w-full justify-center sm:justify-start">
+                    <i data-lucide="mail" class="w-4 h-4 text-stone-400"></i> hello@ottercat.cozy
+                </div>
+                <div class="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white border border-stone-200/60 text-stone-700 w-full justify-center sm:justify-start">
+                    <i data-lucide="github" class="w-4 h-4 text-stone-400"></i> github.com/im-ottercat
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. Footer 底部栏 -->
+    <footer class="border-t border-stone-200/60 bg-stone-50/50 mt-20 py-10 text-stone-400 text-xs">
+        <div class="max-w-4xl w-full mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 爱学习的獭猫. 慢火慢熬的数字花园.
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5"></i> Email</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="rss" class="w-3.5 h-3.5"></i> RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

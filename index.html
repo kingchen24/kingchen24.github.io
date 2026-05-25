@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱学习的獭猫 | 独立数字工作室</title>
+    <!-- 引入 Tailwind CSS v4 -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- 引入 Lucide Icons 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 注入人文字体系与纸质纹理 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #FDFBF7; /* 温暖奶油白 */
+            color: #2D2825; /* 炭灰棕 */
+        }
+        
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, serif;
+        }
+
+        /* 模拟优雅的实体纸张微弱网格底纹（轻科研感） */
+        .bg-grid-notebook {
+            background-image: radial-gradient(rgba(45, 40, 37, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-grid-notebook selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col antialiased">
+
+    <!-- 1. Header 导航栏 -->
+    <header class="max-w-4xl w-full mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="font-serif-sc text-xl font-bold tracking-wider hover:text-amber-700 transition-colors duration-300 flex items-center gap-2">
+            <span>🐾</span> 爱学习的獭猫
+        </a>
+        <nav class="flex items-center gap-8 text-sm font-medium text-stone-500">
+            <a href="blog-list.html" class="hover:text-stone-900 transition-colors duration-300">Notes</a>
+            <a href="index.html#projects" class="hover:text-stone-900 transition-colors duration-300">Projects</a>
+            <a href="index.html#journey" class="hover:text-stone-900 transition-colors duration-300">Timeline</a>
+            <a href="about.html" class="hover:text-stone-900 transition-colors duration-300">About</a>
+        </nav>
+    </header>
+
+    <!-- 主体内容容器 -->
+    <main class="max-w-4xl w-full mx-auto px-6 flex-grow">
+
+        <!-- 2. Hero 区域：温暖工作室氛围 -->
+        <section class="py-12 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-12 items-center border-b border-stone-200/60 pb-16">
+            <!-- 左侧：文字设定 -->
+            <div class="md:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/50 text-xs text-amber-800 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                    深夜的数字工作室里，灯还亮着
+                </div>
+                <h1 class="font-serif-sc text-3xl md:text-4xl font-bold tracking-tight text-stone-900 leading-tight">
+                    构建、思考与漫长的成长。<br>
+                    我是<span class="text-amber-600">獭猫</span>。
+                </h1>
+                <p class="text-stone-600 leading-relaxed text-sm md:text-base space-y-2 max-w-lg">
+                    一只兼具「水獭折腾劲」与「美短猫安静气质」的数字创作者。这里是我的个人档案馆与小玩具工坊，记录我在计算机科学、独立开发以及长期主义成长道路上的足迹。
+                </p>
+                <div class="pt-2 flex items-center gap-4 text-xs text-stone-400 font-medium tracking-wide">
+                    <span class="flex items-center gap-1"><i data-lucide="code-2" class="w-3.5 h-3.5"></i> Code Everything</span>
+                    <span class="flex items-center gap-1"><i data-lucide="book-open" class="w-3.5 h-3.5"></i> Read Papers</span>
+                    <span class="flex items-center gap-1"><i data-lucide="coffee" class="w-3.5 h-3.5"></i> Stay Cozy</span>
+                </div>
+            </div>
+            
+            <!-- 右侧：高级品牌IP插画 (纯手绘高级感内嵌SVG) -->
+            <div class="md:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-[280px] aspect-square bg-stone-100/40 border border-stone-200/60 rounded-2xl p-6 flex items-center justify-center shadow-xs">
+                    <!-- SVG 插画：深夜伏案学习的獭猫 -->
+                    <svg viewBox="0 0 200 200" class="w-full h-full text-stone-700" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- 台灯暖光背景 -->
+                        <path d="M 40 40 Q 110 100 170 170 L 40 170 Z" fill="#FEF3C7" opacity="0.35" stroke="none"/>
+                        <!-- 书桌水平线 -->
+                        <line x1="20" y1="170" x2="180" y2="170" stroke-width="2" class="text-stone-400"/>
+                        <!-- 复古小台灯 -->
+                        <path d="M 35 170 L 35 155 Q 35 110 55 100 L 70 105" />
+                        <path d="M 65 95 L 85 105 L 75 115 L 55 105 Z" fill="#F59E0B" class="text-amber-500" stroke-width="1"/>
+                        <!-- 实体笔记本与公式线 -->
+                        <path d="M 125 170 L 165 160 L 155 140 L 115 150 Z" fill="#FFFFFF"/>
+                        <line x1="128" y1="158" x2="153" y2="152" stroke-width="1" opacity="0.4"/>
+                        <line x1="125" y1="152" x2="145" y2="147" stroke-width="1" opacity="0.4"/>
+                        <!-- 笔记本上的极小公式数学符号 -->
+                        <path d="M 148 143 L 152 145 M 152 143 L 148 145" stroke-width="0.8" opacity="0.6"/> 
+                        <!-- 屏幕/轻科研终端 -->
+                        <rect x="75" y="115" width="45" height="32" rx="2" fill="#2D2825" class="text-stone-800"/>
+                        <line x1="97" y1="147" x2="97" y2="160" />
+                        <line x1="87" y1="160" x2="107" y2="160" />
+                        <!-- 屏幕内极其微弱的代码行 -->
+                        <line x1="80" y1="122" x2="95" y2="122" stroke="#6EE7B7" stroke-width="1" opacity="0.8"/>
+                        <line x1="80" y1="128" x2="105" y2="128" stroke="#6EE7B7" stroke-width="1" opacity="0.8"/>
+                        <line x1="85" y1="134" x2="100" y2="134" stroke="#FCD34D" stroke-width="1" opacity="0.8"/>
+                        <!-- 冒着热气的咖啡杯 -->
+                        <rect x="125" y="155" width="10" height="12" rx="1" fill="#D97706" class="text-amber-700"/>
+                        <path d="M 127 151 Q 128 147 127 145 M 131 152 Q 132 148 131 146" stroke-width="1" class="text-amber-600"/>
+                        <!-- 核心主角：认真敲代码的獭猫（简笔高级感线条） -->
+                        <!-- 身体与靠椅 -->
+                        <path d="M 112 170 Q 115 142 102 135 Q 98 132 95 136" fill="#E5E7EB" stroke-width="1.5"/>
+                        <!-- 水獭的大尾巴垂在椅子旁 -->
+                        <path d="M 112 168 Q 130 178 128 162 Q 120 158 112 165" fill="#D1D5DB" opacity="0.8"/>
+                        <!-- 头部与猫耳 -->
+                        <circle cx="100" cy="122" r="10" fill="#E5E7EB"/>
+                        <path d="M 92 115 L 94 109 L 98 113" fill="#E5E7EB"/> <!-- 左耳 -->
+                        <path d="M 108 115 L 106 109 L 102 113" fill="#E5E7EB"/> <!-- 右耳 -->
+                        <!-- 认真看屏幕的黑框眼镜 -->
+                        <rect x="88" y="119" width="6" height="5" rx="0.5" stroke-width="1"/>
+                        <rect x="96" y="119" width="6" height="5" rx="0.5" stroke-width="1"/>
+                        <line x1="94" y1="121" x2="96" y2="121" stroke-width="1"/>
+                        <!-- 专注搭在键盘上的小爪子 -->
+                        <path d="M 102 136 Q 92 142 84 145" />
+                        <path d="M 102 138 Q 94 144 86 148" />
+                    </svg>
+                    <!-- 漂浮修饰物：静谧的星空/音符暗示 -->
+                    <i data-lucide="sparkles" class="absolute top-4 right-4 w-4 h-4 text-amber-400/70"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Latest Notes 模块：单栏干净档案馆 -->
+        <section id="notes" class="py-16 border-b border-stone-200/60">
+            <div class="flex justify-between items-baseline mb-10">
+                <h2 class="font-serif-sc text-xl font-bold tracking-wide flex items-center gap-2 text-stone-950">
+                    <i data-lucide="archive" class="w-4 h-4 text-stone-400"></i> 最近的研究与笔记
+                </h2>
+                <a href="blog-list.html" class="text-xs font-medium text-amber-700 hover:text-amber-800 transition-colors flex items-center gap-0.5">
+                    查看全部档案馆 <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                </a>
+            </div>
+            
+            <div class="space-y-10">
+                <!-- 笔记卡片 1 -->
+                <a href="blog-detail.html" class="group block relative cursor-pointer">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 text-xs text-stone-400">
+                            <time datetime="2026-05-20">2026.05.20</time>
+                            <span>•</span>
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 12 min read</span>
+                            <span>•</span>
+                            <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-mono text-[10px]">#深度学习</span>
+                        </div>
+                        <h3 class="font-serif-sc text-lg font-bold text-stone-900 group-hover:text-amber-700 transition-colors duration-300">
+                            理解 Transformer 中的旋转位置编码 (RoPE)：从几何直觉到数学推导
+                        </h3>
+                        <p class="text-stone-500 text-sm leading-relaxed max-w-3xl group-hover:text-stone-600 transition-colors duration-300">
+                            最近看论文时重新推了一遍 RoPE 的复数空间旋转。这篇文章尝试不堆砌公式，而是从二维坐标旋转的几何直觉出发，一步步拆解为什么它在处理长文本外推时如此优雅...
+                        </p>
+                    </div>
+                    <!-- 极其克制的底层呼吸线 -->
+                    <div class="absolute -inset-x-3 -inset-y-2 rounded-xl group-hover:bg-stone-100/40 -z-10 transition-all duration-300"></div>
+                </a>
+
+                <!-- 笔记卡片 2 -->
+                <a href="blog-list.html" class="group block relative cursor-pointer">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 text-xs text-stone-400">
+                            <time datetime="2026-04-15">2026.04.15</time>
+                            <span>•</span>
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 8 min read</span>
+                            <span>•</span>
+                            <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-mono text-[10px]">#独立开发</span>
+                        </div>
+                        <h3 class="font-serif-sc text-lg font-bold text-stone-900 group-hover:text-amber-700 transition-colors duration-300">
+                            为什么我的独立轻量级卡片笔记工具坚持采用本地优先（Local-First）架构？
+                        </h3>
+                        <p class="text-stone-500 text-sm leading-relaxed max-w-3xl group-hover:text-stone-600 transition-colors duration-300">
+                            在云端协同泛滥的今天，聊聊我为什么花了一个月将数据完全下沉到 CRDTs 和 IndexedDB。数据隐私只是其一，那种秒开的无缝感以及不依赖网络的踏实感，才是真正的数字舒适圈...
+                        </p>
+                    </div>
+                    <div class="absolute -inset-x-3 -inset-y-2 rounded-xl group-hover:bg-stone-100/40 -z-10 transition-all duration-300"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 4. Recent Projects 模块：2列手工作坊 -->
+        <section id="projects" class="py-16 border-b border-stone-200/60">
+            <div class="flex justify-between items-baseline mb-10">
+                <h2 class="font-serif-sc text-xl font-bold tracking-wide flex items-center gap-2 text-stone-950">
+                    <i data-lucide="binary" class="w-4 h-4 text-stone-400"></i> 折腾的小玩具与实验
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 项目 1 -->
+                <div class="group border border-stone-200/60 hover:border-stone-300 rounded-xl p-5 bg-white/50 hover:bg-white transition-all duration-300 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div class="p-2 bg-amber-50 rounded-lg text-amber-700 border border-amber-100">
+                                <i data-lucide="cpu" class="w-4 h-4"></i>
+                            </div>
+                            <a href="#" class="text-stone-400 hover:text-stone-600 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                        </div>
+                        <h3 class="font-serif-sc font-bold text-stone-900 group-hover:text-amber-700 transition-colors">OtterCat-Core (16-bit)</h3>
+                        <p class="text-stone-500 text-xs leading-relaxed">
+                            在 FPGA 上用 Verilog 实现的一个简易 16 位微型处理器架构，包含了自制的 8 条核心指令集。用于治愈自己的硬件科研宅强迫症。
+                        </p>
+                    </div>
+                    <div class="pt-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-400"></span>
+                        <span class="text-[11px] font-mono text-stone-400">Verilog / 计算机体系结构</span>
+                    </div>
+                </div>
+
+                <!-- 项目 2 -->
+                <div class="group border border-stone-200/60 hover:border-stone-300 rounded-xl p-5 bg-white/50 hover:bg-white transition-all duration-300 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div class="p-2 bg-stone-100 rounded-lg text-stone-600 border border-stone-200/40">
+                                <i data-lucide="calendar-heart" class="w-4 h-4"></i>
+                            </div>
+                            <a href="#" class="text-stone-400 hover:text-stone-600 transition-colors"><i data-lucide="external-link" class="w-4 h-4"></i></a>
+                        </div>
+                        <h3 class="font-serif-sc font-bold text-stone-900 group-hover:text-amber-700 transition-colors">CozyGarden RSS</h3>
+                        <p class="text-stone-500 text-xs leading-relaxed">
+                            轻量级无压力 RSS 桌面阅读器。没有花哨的算法推荐，纯粹基于本地沙盒过滤，支持卡片式“数字温室”排版，专门适合深夜安静长读。
+                        </p>
+                    </div>
+                    <div class="pt-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                        <span class="text-[11px] font-mono text-stone-400">TypeScript / Electron</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Learning Journey 模块：时间线 -->
+        <section id="journey" class="py-16">
+            <h2 class="font-serif-sc text-xl font-bold tracking-wide flex items-center gap-2 text-stone-950 mb-10">
+                <i data-lucide="milestone" class="w-4 h-4 text-stone-400"></i> 獭猫的成长碎碎念
+            </h2>
+            
+            <!-- 极简时间线轴 -->
+            <div class="relative border-l border-stone-200/80 ml-2 pl-6 space-y-8">
+                <!-- 节点 1 -->
+                <div class="relative">
+                    <!-- 点 -->
+                    <span class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full border-2 border-amber-600 bg-white"></span>
+                    <div class="space-y-1">
+                        <span class="text-xs font-mono font-semibold text-amber-700">2026.05</span>
+                        <h4 class="text-sm font-semibold text-stone-900">开始死磕图形学与 WebGPU 核心渲染管线</h4>
+                        <p class="text-xs text-stone-500 leading-relaxed max-w-2xl">
+                            感觉有些底层的光影算法还是要在画布上跑一跑才踏实。手写了几个噪声生成器，深夜看着屏幕上泛起的算法微光，有一种独特的解压感。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 节点 2 -->
+                <div class="relative">
+                    <span class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full border-2 border-stone-400 bg-white group-hover:border-stone-600"></span>
+                    <div class="space-y-1">
+                        <span class="text-xs font-mono font-semibold text-stone-400">2026.04</span>
+                        <h4 class="text-sm font-semibold text-stone-900">独立网站的 IP 角色「獭猫」形象正式敲定</h4>
+                        <p class="text-xs text-stone-500 leading-relaxed max-w-2xl">
+                            改了十几稿，终于把水獭的憨厚敏捷和美短猫的软萌安静揉在了一起。以后它就是这个数字花园的常驻首席研究员了。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 节点 3 -->
+                <div class="relative">
+                    <span class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full border-2 border-stone-400 bg-white"></span>
+                    <div class="space-y-1">
+                        <span class="text-xs font-mono font-semibold text-stone-400">2026.02</span>
+                        <h4 class="text-sm font-semibold text-stone-900">全面拥抱长期主义，重组并精简了个人知识库</h4>
+                        <p class="text-xs text-stone-500 leading-relaxed max-w-2xl">
+                            删掉了海量碎片化的收藏夹，退出了浮躁的技术社群，把笔记迁移回纸质框架和 Markdown 纯文本。专注才是抵抗焦虑的唯一解。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 6. Footer 底部栏 -->
+    <footer class="border-t border-stone-200/60 bg-stone-50/50 mt-12 py-10 text-stone-400 text-xs">
+        <div class="max-w-4xl w-full mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 爱学习的獭猫. 慢火慢熬的数字花园.
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5"></i> Email</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="rss" class="w-3.5 h-3.5"></i> RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 初始化 Lucide 图标的极简脚本 -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习档案馆 | 爱学习的獭猫</title>
+    <!-- 引入 Tailwind CSS v4 -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- 引入 Lucide Icons 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #FDFBF7; /* 温暖奶油白 */
+            color: #2D2825; /* 炭灰棕 */
+        }
+        
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, serif;
+        }
+
+        .bg-grid-notebook {
+            background-image: radial-gradient(rgba(45, 40, 37, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-grid-notebook selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col antialiased">
+
+    <!-- 1. Header 导航栏 -->
+    <header class="max-w-4xl w-full mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="font-serif-sc text-xl font-bold tracking-wider hover:text-amber-700 transition-colors duration-300 flex items-center gap-2">
+            <span>🐾</span> 爱学习的獭猫
+        </a>
+        <nav class="flex items-center gap-8 text-sm font-medium text-stone-500">
+            <a href="blog-list.html" class="text-stone-900 border-b border-stone-800 pb-0.5">Notes</a>
+            <a href="index.html#projects" class="hover:text-stone-900 transition-colors duration-300">Projects</a>
+            <a href="index.html#journey" class="hover:text-stone-900 transition-colors duration-300">Timeline</a>
+            <a href="about.html" class="hover:text-stone-900 transition-colors duration-300">About</a>
+        </nav>
+    </header>
+
+    <!-- 2. 主体档案馆区域 -->
+    <main class="max-w-4xl w-full mx-auto px-6 flex-grow py-8">
+        
+        <!-- 档案馆头部信息 -->
+        <div class="border-b border-stone-200/60 pb-8 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="space-y-2">
+                <h1 class="font-serif-sc text-2xl md:text-3xl font-bold text-stone-900 tracking-tight">学习档案馆</h1>
+                <p class="text-xs text-stone-400 font-medium flex items-center gap-1.5">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> 截至今日已安稳封存了 42 篇技术手稿与实验观测。
+                </p>
+            </div>
+            
+            <!-- 克制的轻科研感检索框 -->
+            <div class="relative w-full md:w-64">
+                <input type="text" placeholder="翻阅手稿记录..." class="w-full text-xs px-3 py-2 pl-8 rounded-lg bg-stone-100/60 border border-stone-200/60 placeholder-stone-400 focus:outline-hidden focus:border-stone-400 focus:bg-white transition-all duration-300 text-stone-800" />
+                <i data-lucide="search" class="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2"></i>
+            </div>
+        </div>
+
+        <!-- 分类与标签过滤器 (书签质感) -->
+        <div class="space-y-4 mb-12">
+            <!-- 大分类：水平面包屑书签 -->
+            <div class="flex flex-wrap items-center gap-2 text-xs font-medium text-stone-500 border-b border-stone-100 pb-3">
+                <span class="text-stone-400 mr-2">分类索引:</span>
+                <a href="#" class="px-3 py-1 rounded-md bg-stone-200/60 text-stone-900">全部手稿 (42)</a>
+                <a href="#" class="px-3 py-1 rounded-md hover:bg-stone-100 hover:text-stone-900 transition-colors">计算机科学 (18)</a>
+                <a href="#" class="px-3 py-1 rounded-md hover:bg-stone-100 hover:text-stone-900 transition-colors">独立开发日志 (15)</a>
+                <a href="#" class="px-3 py-1 rounded-md hover:bg-stone-100 hover:text-stone-900 transition-colors">科研白皮书 (9)</a>
+            </div>
+            <!-- 小标签：颗粒胶囊 -->
+            <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-stone-400">
+                <span class="mr-1"><i data-lucide="tags" class="w-3 h-3 inline mr-0.5"></i> 细分过滤:</span>
+                <a href="#" class="px-2 py-0.5 rounded border border-stone-200/40 hover:border-stone-400 hover:text-stone-700 transition-all">#Transformer</a>
+                <a href="#" class="px-2 py-0.5 rounded border border-stone-200/40 hover:border-stone-400 hover:text-stone-700 transition-all">#FPGA</a>
+                <a href="#" class="px-2 py-0.5 rounded border border-amber-300 bg-amber-50/50 text-amber-800">#Local-First</a>
+                <a href="#" class="px-2 py-0.5 rounded border border-stone-200/40 hover:border-stone-400 hover:text-stone-700 transition-all">#WebGPU</a>
+                <a href="#" class="px-2 py-0.5 rounded border border-stone-200/40 hover:border-stone-400 hover:text-stone-700 transition-all">#长期主义</a>
+                <a href="#" class="px-2 py-0.5 rounded border border-stone-200/40 hover:border-stone-400 hover:text-stone-700 transition-all">#读书手札</a>
+            </div>
+        </div>
+
+        <!-- 3. 档案卡片列表流 (大呼吸感单栏) -->
+        <div class="space-y-12">
+            
+            <!-- 档案 1 -->
+            <article class="group relative flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-6 items-start">
+                <!-- 左侧时间维度 -->
+                <div class="md:col-span-2 flex md:flex-col items-center md:items-start gap-2 md:gap-0.5 text-xs font-mono text-stone-400 pt-1">
+                    <time datetime="2026-05-20" class="font-semibold text-stone-500">2026.05.20</time>
+                    <span class="md:hidden">•</span>
+                    <span class="text-[11px]">星期三深夜</span>
+                </div>
+                <!-- 右侧档案主体 -->
+                <div class="md:col-span-10 space-y-2.5 w-full">
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-2 text-xs text-stone-400">
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 12 min read</span>
+                            <span>•</span>
+                            <span class="text-stone-500">计算机科学</span>
+                        </div>
+                        <!-- 轻科研属性小 icon，暗示技术方向 -->
+                        <div class="text-stone-300 group-hover:text-amber-600/60 transition-colors duration-500">
+                            <i data-lucide="cpu" class="w-4 h-4" stroke-width="1.5"></i>
+                        </div>
+                    </div>
+                    <a href="blog-detail.html" class="block">
+                        <h2 class="font-serif-sc text-xl font-bold text-stone-900 group-hover:text-amber-700 transition-colors duration-300 leading-snug">
+                            理解 Transformer 中的旋转位置编码 (RoPE)：从几何直觉到数学推导
+                        </h2>
+                    </a>
+                    <p class="text-stone-500 text-sm leading-relaxed max-w-2xl">
+                        最近看论文时重新推了一遍 RoPE 的复数空间旋转。这篇文章尝试不堆砌公式，而是从二维坐标旋转的几何直觉出发，一步步拆解为什么它在处理长文本外推时如此优雅，并包含完整的张量旋转代码块演练。
+                    </p>
+                </div>
+                <!-- 底部极淡分割线 -->
+                <div class="absolute -inset-x-4 -inset-y-3 rounded-xl group-hover:bg-stone-100/40 -z-10 transition-all duration-300"></div>
+            </article>
+
+            <!-- 档案 2 -->
+            <article class="group relative flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-6 items-start">
+                <div class="md:col-span-2 flex md:flex-col items-center md:items-start gap-2 md:gap-0.5 text-xs font-mono text-stone-400 pt-1">
+                    <time datetime="2026-04-15" class="font-semibold text-stone-500">2026.04.15</time>
+                    <span class="md:hidden">•</span>
+                    <span class="text-[11px]">雨天午后</span>
+                </div>
+                <div class="md:col-span-10 space-y-2.5 w-full">
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-2 text-xs text-stone-400">
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 8 min read</span>
+                            <span>•</span>
+                            <span class="text-stone-500">独立开发日志</span>
+                        </div>
+                        <div class="text-stone-300 group-hover:text-emerald-600/60 transition-colors duration-500">
+                            <i data-lucide="beaker" class="w-4 h-4" stroke-width="1.5"></i>
+                        </div>
+                    </div>
+                    <a href="#" class="block">
+                        <h2 class="font-serif-sc text-xl font-bold text-stone-900 group-hover:text-amber-700 transition-colors duration-300 leading-snug">
+                            为什么我的独立轻量级卡片笔记工具坚持采用本地优先（Local-First）架构？
+                        </h2>
+                    </a>
+                    <p class="text-stone-500 text-sm leading-relaxed max-w-2xl">
+                        在云端协同泛滥的今天，聊聊我为什么花了一个月将数据完全下沉到 CRDTs 和 IndexedDB。数据隐私只是其一，那种秒开的无缝感以及不依赖网络的踏实感，才是真正的数字舒适圈。
+                    </p>
+                </div>
+                <div class="absolute -inset-x-4 -inset-y-3 rounded-xl group-hover:bg-stone-100/40 -z-10 transition-all duration-300"></div>
+            </article>
+
+            <!-- 档案 3 -->
+            <article class="group relative flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-6 items-start">
+                <div class="md:col-span-2 flex md:flex-col items-center md:items-start gap-2 md:gap-0.5 text-xs font-mono text-stone-400 pt-1">
+                    <time datetime="2026-03-02" class="font-semibold text-stone-500">2026.03.02</time>
+                    <span class="md:hidden">•</span>
+                    <span class="text-[11px]">大寒寒夜</span>
+                </div>
+                <div class="md:col-span-10 space-y-2.5 w-full">
+                    <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-2 text-xs text-stone-400">
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 15 min read</span>
+                            <span>•</span>
+                            <span class="text-stone-500">科研白皮书</span>
+                        </div>
+                        <div class="text-stone-300 group-hover:text-blue-600/60 transition-colors duration-500">
+                            <i data-lucide="binary" class="w-4 h-4" stroke-width="1.5"></i>
+                        </div>
+                    </div>
+                    <a href="#" class="block">
+                        <h2 class="font-serif-sc text-xl font-bold text-stone-900 group-hover:text-amber-700 transition-colors duration-300 leading-snug">
+                            16位微型自定义微处理器自制记录：Verilog 仿真到波形观测分析
+                        </h2>
+                    </a>
+                    <p class="text-stone-500 text-sm leading-relaxed max-w-2xl">
+                        记录自己搭建编译环境，到手动写出微架构算术逻辑单元（ALU）的全过程。文中贴出了详细的时序仿真波形图分析，以及在解决数据冲突（Data Hazard）时的几次失败推演记录。
+                    </p>
+                </div>
+                <div class="absolute -inset-x-4 -inset-y-3 rounded-xl group-hover:bg-stone-100/40 -z-10 transition-all duration-300"></div>
+            </article>
+
+        </div>
+
+        <!-- 4. 纸质笔记本翻页式 分页系统 -->
+        <nav class="mt-20 border-t border-stone-200/60 pt-6 flex items-center justify-between text-xs font-medium text-stone-500">
+            <a href="#" class="flex items-center gap-1 hover:text-stone-900 transition-colors py-2">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> 往回翻页 (前页)
+            </a>
+            <span class="font-mono text-stone-400">第 01 卷 / 共 04 卷</span>
+            <a href="#" class="flex items-center gap-1 hover:text-stone-900 transition-colors py-2">
+                往深处读 (后页) <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </nav>
+
+    </main>
+
+    <!-- 5. Footer 底部栏 -->
+    <footer class="border-t border-stone-200/60 bg-stone-50/50 mt-20 py-10 text-stone-400 text-xs">
+        <div class="max-w-4xl w-full mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 爱学习的獭猫. 慢火慢熬的数字花园.
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5"></i> Email</a>
+                <a href="#" class="hover:text-stone-700 transition-colors flex items-center gap-1"><i data-lucide="rss" class="w-3.5 h-3.5"></i> RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 激活 Lucide 纤细手绘风格图标
+        lucide.createIcons();
+    </script>
+</body>
+</html>
